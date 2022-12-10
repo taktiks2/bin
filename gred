@@ -1,0 +1,3 @@
+#!/bin/bash
+ROW_NUM=`grep -n piyo package.json | sed -e 's/:.*//g'`
+echo $ROW_NUM

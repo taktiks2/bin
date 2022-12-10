@@ -1,3 +1,18 @@
 #!/bin/bash
+# $0はコマンドとして指定した名前が入る
+# パターンマッチで最後の/まで取り除く
+readonly SCRIPT_NAME=${0##*/}
 
-echo helloworld
+result=0
+
+for number in "$@"
+do
+	# 整数以外受け付けない
+	if [[ ! $number =~ ^-?[0-9]+$ ]]; then
+		printf '%s\n' "${SCRIPT_NAME}: '$number': non-integer number" 1>&2
+		exit 1
+	fi
+	((result+=number))
+done
+
+printf '%s\n' "$result"

@@ -1,3 +1,17 @@
 #!/bin/bash
-ROW_NUM=`grep -n piyo package.json | sed -e 's/:.*//g'`
-echo $ROW_NUM
+
+# \でスペースをエスケープできる
+COMMAND='\         test test test'
+
+# 行数取得
+ROW_NUM=`grep -n hoge package.json | sed -e 's/:.*//g'`
+
+# 行挿入
+sed -i "${ROW_NUM}a ${COMMAND}" package.json
+cat package.json
+
+# 行削除
+sed -i "$((++ROW_NUM))d" package.json
+cat package.json
+
+echo done! 

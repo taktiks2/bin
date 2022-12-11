@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# 行を挿入することで行数が変わってしまうので実用的ではない
+
+# \でスペースをエスケープできる
+COMMAND='\         test test test'
+
+# 行数取得
+ROW_NUMS=`grep -n test package.json | sed -e 's/:.*//g'`
+
+# 行挿入
+for row in $ROW_NUMS;
+do
+	sed -i "${row}a ${COMMAND}" package.json
+done
+cat package.json
+
+# 行削除
+for row in $ROW_NUMS;
+do
+	sed -i "$((++row))d" package.json
+done
+cat package.json
+
+echo done! 
